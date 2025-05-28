@@ -16,7 +16,7 @@ def ler_todas_palavras():
     Lê todas as palavras do arquivo e retorna uma lista com elas.
     Remove palavras com letras maiusculas ou com acentos ou com ç.
     """
-    with open("palav.txt", "r") as f:
+    with open("palav.txt", "r", encoding="utf-8") as f:
         palavras = f.readlines()
 
     palavras = [p.strip() for p in palavras]
@@ -94,6 +94,7 @@ class Termo:
             return []
 
         if ret == ["G", "G", "G", "G", "G"]:
+            self._print_feedback(tentativa, ret)
             self._print(
                 f"Você ganhou {max(7 - self.tentativas, 0)} pontos!", style="green"
             )
@@ -113,7 +114,7 @@ class Termo:
             self._print(tentativa[i], end="", style=style[ret[i]])
             if ret[i] == "B":
                 self.letras_erradas.add(tentativa[i])
-        print(" --", *self.letras_erradas)
+        self._print(" --", *self.letras_erradas)
 
     def iterativo(self):
         """
